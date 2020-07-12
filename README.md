@@ -15,7 +15,7 @@ CSS for the app is developed using SASS and, the client-side interactivity is, d
 
 **Image Captioning**
 
-The app uses by a pre-train machine learning model called DenseCap which is developed in Lua using the framework Torch. DenseCap is used to perform image captioning by generating text descriptions for the different objects it detects within an image. The paper regarding this model can be found, [here] (https://cs.stanford.edu/people/karpathy/densecap/). 
+The app uses by a pre-train machine learning model called DenseCap which is developed in Lua using the framework Torch. DenseCap is used to perform image captioning by generating text descriptions for the different objects it detects within an image. The paper regarding this model can be found, [here](https://cs.stanford.edu/people/karpathy/densecap/). 
  
 **Street View Images**
 
