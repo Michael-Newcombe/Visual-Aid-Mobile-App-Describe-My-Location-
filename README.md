@@ -11,7 +11,7 @@ Describe My Location is designed to aid people who are blind and visually impair
 **The App**
 
 The app is, developed using the Python web framework Flask, the
-CSS for the app is developed using SASS and, the client-side interactivity is, developed using vanilla JavaScript. Furthermore, the application also uses a MySQL database which is, used for storing user feedback. 
+CSS for the app is developed using Sass and, the client-side interactivity is, developed using vanilla JavaScript. Furthermore, the application also uses a MySQL database which is, used for storing user feedback. 
 
 **Image Captioning**
 
@@ -22,4 +22,8 @@ The app uses by a pre-train machine learning model called DenseCap which is deve
 The street view image the app uses as a reference for the user's surroundings is, based on the user's current location this works, by retrieving the device's geolocation coordinates. As well as the user's location, the direction that the user is facing is also retrieved, by accessing the device's orientation properties. This data is, then passed into the API, Bing™ Maps REST Services which is, used to get the street view image for the user's current location. Documentation on this API can be found, [here](https://docs.microsoft.com/en-us/bingmaps/rest-services/).
 
 **Addtional Features**
-In case the app is unable to retrieve a street view image, the user can instead upload an image or take a picture of an image using their device's camera. 
+In case the app is unable to retrieve a street view image, the user can instead upload an image or take a picture of an image using their device's camera.
+
+**Prerequisites**
+
+DenseCap, Python 3, Flask 1.1.1, flask-wtf, pyOpenSSL, wtforms, NumPy
