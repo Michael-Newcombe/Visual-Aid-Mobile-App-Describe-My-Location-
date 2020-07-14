@@ -47,7 +47,7 @@ _camera_img = {'filename': ''}
 # Mutable dictionary for checking if the image is a street view image from Bing Maps, initially set to false
 _street_view = {'streetView': False}
 
-connect_to_db = True
+connect_to_db = False
 
 # Creating a instance of Flask
 app = Flask(__name__)
