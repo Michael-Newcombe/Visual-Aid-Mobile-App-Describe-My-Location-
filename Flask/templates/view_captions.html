@@ -1,0 +1,110 @@
+<!-- Inherits from the page base.html -->
+{% extends "base.html" %}
+  <!-- Inheritance start -->
+  {% block body %}
+    <!-- Captions container -->
+    <div id="caption-text">
+      <!-- Rendering the form received flash message -->
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </div>
+    <!-- Image container div -->
+    <div id="image-container">
+      <!-- Audio icon -->
+      <div class="absolute">
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+        width="38" height="38"
+        viewBox="0 0 172 172"
+        style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M83.205,10.32c-3.13094,0 -6.38281,1.505 -9.03,4.1925l-39.99,39.8825c-2.20375,1.94844 -3.225,5.72438 -3.225,8.385v46.44c0,2.63375 1.08844,6.38281 3.1175,8.17l39.8825,39.775c3.62813,3.68188 6.97406,4.515 9.1375,4.515c5.73781,0 9.7825,-5.24062 9.7825,-12.685v-127.28c0,-7.83406 -5.02562,-11.395 -9.675,-11.395zM131.6875,23.435c-1.505,0.25531 -2.66062,1.47813 -2.83531,2.99656c-0.16125,1.51844 0.67188,2.96969 2.08281,3.56094c20.46531,10.32 34.4,31.48406 34.4,56.0075c0,24.52344 -13.93469,45.6875 -34.4,56.0075c-1.26312,0.43 -2.15,1.55875 -2.29781,2.87563c-0.14781,1.33031 0.48375,2.62031 1.62594,3.31906c1.12875,0.68531 2.56656,0.65844 3.68187,-0.06719c22.70938,-11.46219 38.27,-34.97781 38.27,-62.135c0,-27.15719 -15.56062,-50.67281 -38.27,-62.135c-0.59125,-0.33594 -1.26312,-0.48375 -1.935,-0.43c-0.1075,0 -0.215,0 -0.3225,0zM119.4325,41.71c-1.53187,0.18813 -2.75469,1.38406 -2.96969,2.91594c-0.22844,1.51844 0.59125,3.01 2.00219,3.64156c13.42406,7.24281 22.575,21.37906 22.575,37.7325c0,16.29969 -9.11062,30.47625 -22.4675,37.7325c-1.66625,0.91375 -2.27094,3.01 -1.34375,4.67625c0.91375,1.66625 3.01,2.27094 4.67625,1.34375c15.50688,-8.42531 26.015,-24.88625 26.015,-43.7525c0,-18.92 -10.535,-35.44812 -26.1225,-43.86c-0.61812,-0.34937 -1.33031,-0.49719 -2.0425,-0.43c-0.1075,0 -0.215,0 -0.3225,0zM10.32,54.9325c-5.76469,0 -10.4275,4.66281 -10.4275,10.4275v41.28c0,5.76469 4.66281,10.4275 10.4275,10.4275h15.3725c-1.12875,-2.70094 -1.6125,-5.57656 -1.6125,-7.8475v-46.44c0,-2.2575 0.56438,-5.11969 1.72,-7.8475zM105.0275,63.3175c-1.66625,0.20156 -2.92937,1.57219 -3.01,3.25188c-0.08062,1.66625 1.04813,3.15781 2.6875,3.52062c7.04125,1.84094 12.255,8.26406 12.255,15.91c0,7.64594 -5.21375,14.06906 -12.255,15.91c-1.84094,0.47031 -2.94281,2.35156 -2.4725,4.1925c0.47031,1.84094 2.35156,2.94281 4.1925,2.4725c10.02438,-2.62031 17.415,-11.78469 17.415,-22.575c0,-10.79031 -7.40406,-19.95469 -17.415,-22.575c-0.45687,-0.13437 -0.92719,-0.16125 -1.3975,-0.1075z"></path></g></g></svg>
+      </div>
+      <!-- Accessing the image using the variable filename -->
+      <img id="jpgImage" width="720px" height="720px" src="../static/images/{{filename}}">
+      <!-- canvas  -->
+      <canvas id="canvas" width="720px" height="720px" >
+      </canvas>
+    </div>
+    <!-- Image container div END -->
+    <!-- Text to speech error messages container -->
+    <div>
+      <p id="speech-error"></p>
+    </div>
+    <!-- Feedback form container -->
+    <div id="submit-form">
+      <!-- Form -->
+      <form method="post" action="/captions/{{filename}}">
+        
+        <!-- Protecting against cross-site request forgery by generating a unique token to send to the server which makes sure that the POST request is from this form -->
+        {{ form.csrf_token }}
+
+        <!-- Rendering the filename field -->
+        {{ form.filename(value=filename) }}
+          {% if form.filename.errors %}
+           <!-- Rendering any filename field errors -->
+            <ul class='errors'> 
+              {% for error in form.filename.errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+
+        <!-- Rendering the captions field -->
+        {{ form.captions}}
+        {% if form.captions.errors %}
+         <!-- Rendering any captions field errors -->
+          <ul class='errors'> 
+            {% for error in form.captions.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+          <label>How accurate was the description of the image on a scale from 1 to 5</label>
+          <br>
+          <br>
+          <label>*required</label>
+          <div class="radio-buttons">
+            <!-- Rendering the radio buttons -->
+            {% for subfield in form.score %}
+              {{ subfield }}
+              {{ subfield.label }}
+            {% endfor %}
+            <!-- Rendering any radio buttons errors-->
+            {% if form.score.errors %}
+              <ul class='errors'>
+                {% for error in form.score.errors %}
+                  <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+          <br>
+          <br>
+
+        <label for="comments">Comments (optional)</label>
+        <!-- Rendering the text area field comments -->
+        {{ form.comments(placeholder='Image does not contain trees') }}
+          <!-- Rendering any text area field errors -->
+          {% if form.comments.errors %}
+            <ul class='errors'>
+              {% for error in form.comments.errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        
+        <!-- Rendering the submit button -->
+        {{ form.submit() }}
+      
+        </form>
+      </div>
+  <!-- Scripts -->
+  <script type='text/javascript' src='../static/scripts/boxesAndCaptions.js'></script>
+  <script type='text/javascript' src='../static/scripts/textToSpeech.js'></script>
+  <script type='text/javascript' src='../static/scripts/form.js'></script>
+<!-- Inheritance end -->
+{% endblock %}

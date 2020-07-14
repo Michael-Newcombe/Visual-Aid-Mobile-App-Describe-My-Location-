@@ -1,0 +1,12 @@
+<!-- Inherits from the page base.html -->
+{% extends "base.html" %}
+  <!-- Inheritance start -->
+  {% block body %}
+    <!-- Div for displaying error messages -->
+    <div class="error-messages">
+      <p>500 the app encountered an error redirecting to homepage...</p>
+    </div>
+    <!-- Scripts -->
+    <script type='text/javascript' src='../static/scripts/redirect.js'></script>
+  <!-- Inheritance end -->
+  {% endblock %}

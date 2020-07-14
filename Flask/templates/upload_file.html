@@ -1,0 +1,27 @@
+<!-- Inherits from the page base.html -->
+{% extends "base.html" %}
+  <!-- Inheritance start -->
+  {% block body %}
+    <!-- Upload image form -->
+    <form id="upload-form" method=post enctype=multipart/form-data>
+      <label class="file-upload-btn">
+        <input id="image-file" type="file" name="file"/>
+        UPLOAD IMAGE
+      </label>
+    </form>
+    <br>
+    <!-- Error messages container -->
+    <div class="error-messages">
+      <!-- Rendering the invalid file format flash message -->
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </div>
+  <!-- Scripts  -->
+  <script type="text/javascript" src="../static/scripts/fileUpload.js"></script>
+  <!-- Inheritance end -->
+  {% endblock %}

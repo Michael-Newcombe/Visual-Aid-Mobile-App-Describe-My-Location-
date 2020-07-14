@@ -1,0 +1,18 @@
+<!-- Inherits from the page base.html -->
+{% extends "base.html" %}
+  <!-- Inheritance start -->
+  {% block body %}
+    <!-- Camera container -->
+    <div id="camera-container">
+      <!-- Canvas -->
+      <canvas id="camera-canvas"></canvas>
+      <!-- Camera -->
+      <video id="camera" autoplay playsinline></video>
+    </div>
+    <!-- Error messages container -->
+    <div class="error-messages">
+    </div>
+    <!-- Scripts -->
+    <script type="text/javascript" src="../static/scripts/camera.js"></script>
+  <!-- Inheritance end -->
+  {% endblock %}

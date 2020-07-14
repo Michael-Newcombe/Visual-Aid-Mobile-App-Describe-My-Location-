@@ -1,0 +1,293 @@
+// Variables
+$mobile-width: 768px;
+$font: "Jura", sans-serif;
+$text-colour: #242424;
+$white: #fcfcfc;
+$purple: linear-gradient(to top, #7f00ff 0%, #8a2be2 100%);
+
+// Mixin for displaying elements in a row using flexbox
+@mixin flex-box-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+// Mixin for removing the default button style
+@mixin transparent-btn {
+  background-color: transparent;
+  border: none;
+  outline:none;
+  padding: 0;
+}
+
+// Mixin for aligning elements in the center both horizontally and vertically
+@mixin center-hor-ver {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+// Mixin for removing the browser scrollbar
+@mixin remove-scroll-bar() {
+  &::-webkit-scrollbar {
+   display: none;
+  }
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+}
+
+// Styling for the whole HTML document
+html,body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  box-sizing: border-box;
+  font-family: $font;
+}
+body{
+  -webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+// Global scalable vector graphics styling 
+svg{
+  margin: 10px;
+}
+
+// Global h2 styling
+h2 {
+  color: #ffffff;
+  margin: 0;
+  padding: 10px;
+}
+
+// Global image styling
+img {
+  width: 100%;
+  height: auto;
+}
+
+// Loading screen background styling
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+}
+
+// Loading screen text styling
+#overlay-text{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 16px;
+  color: white;
+  transform: translate(-50%,-50%);
+  text-align: center;
+}
+
+// Main container styling
+.container {
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  max-width: $mobile-width;
+  height: 100%;
+  margin: auto;
+  background-color: $white;
+  @include remove-scroll-bar();
+    
+    // Header styling
+    .header{
+      width: 100%;
+      text-align: center;
+      background: $purple;
+      filter: drop-shadow(0 2px 8px rgba(#7f00ff, 0.50));
+    }
+    
+    // Index page text container styling
+    #intro-text {
+      @include center-hor-ver();
+      // Index page text styling
+      p{
+        font-size: 18px;
+        font-style: oblique;
+        margin: 0 8px;
+      }
+    }
+    
+    // Caption text container styling
+    #caption-text{
+      text-align: center;
+      font-size: 14px;
+      margin: 12px 4px;
+    }
+    
+    // Test locations styling
+    #test-locs{
+      text-align: center;
+    }
+
+    // Styling for the container containing the captioned image
+    #image-container{
+      position: relative;
+        // Absolute positioning for the audio icon
+        .absolute{
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+        // Setting the jpeg file of the captioned image to display none
+        #jpgImage{
+          display: none;
+        }
+        // Canvas element styling
+        #canvas{
+          width: 100%;
+        }
+    }
+
+    // Error messages container styling
+    .error-messages{
+      @include center-hor-ver();
+      // Error messages text styling
+      p{
+        font-size: 18px;
+        margin: auto;
+      }
+    }
+
+    // Speech error text styling
+    #speech-error{
+      margin: 12px 0px;
+      text-align: center;
+    }
+
+    // Navigation bar styling
+    .nav {
+      @include flex-box-row();
+      position: fixed;
+      background: $purple;
+      overflow: hidden;
+      bottom: 0;
+      width: 100%;
+      z-index: 1;
+      max-width: $mobile-width;
+      filter: drop-shadow(0 2px 8px rgba(#7f00ff, 0.50));
+      
+      // Navigation bar button styling
+      button{
+        display: inline;
+        @include transparent-btn();
+      }
+    }
+
+    // Removing the image upload input file field 
+    input[type="file"] {
+      display: none;
+    }
+
+    // Upload image button styling
+    .file-upload-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: $purple;
+      color: #ffffff;
+      display: inline-block;
+      padding: 32px;
+      border-radius: 4px;
+      filter: drop-shadow(0 2px 8px rgba(#7f00ff, 0.30));
+    }
+
+    // Camera container, camera and canvas styling
+    #camera-container, #camera, #camera-canvas{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    // Feedback form Submit button styling
+    #submit-form{
+      position: relative;
+      padding: 25px 25px 50px 25px;
+      
+      // Feedback form filename field styling
+      #filename, #captions {
+        display: none;
+      }
+
+      // Hiding the default radio buttons for the feedback form 
+      .radio-buttons input[type="radio"] {
+        opacity: 0;
+        position: fixed;
+      }
+      
+      // Custom radio buttons styling for the feedback form
+      .radio-buttons label {
+        display: inline-block;
+        padding: 8px 16px;
+        margin: 8px 4px 0 0;
+        border-radius: 4px;
+        font-family: $font;
+        font-size: 16px;
+        background-color: #ffffff;
+        border: 1px solid rgba(36, 36, 36, 0.5);
+      }
+      .radio-buttons input[type="radio"]:checked + label {
+        background-color: #7f00ff;
+        border-color: #7f00ff;
+        color: #ffffff;
+        filter: drop-shadow(0 2px 8px rgba(#7f00ff, 0.50));
+      }  
+      
+      // Feedback form Unordered list styling
+      ul{
+        list-style-type:none;
+        padding: 0;
+      }
+
+      // Feedback form text area styling
+      textarea{
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 16px;
+        outline:none;
+        border: 1px solid rgba(36, 36, 36, 0.5);
+      }
+
+      // Feedback form submit button styling
+      #submit{
+        width: 100%;
+        margin: 16px 0 32px 0;
+        height: 50px;
+        background: $purple;
+        filter: drop-shadow(0 2px 8px rgba(#7f00ff, 0.30));
+        font: 16px "Jura";
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+      }
+
+      // Feedback Form success container styling 
+      #form-success{
+        @include center-hor-ver();
+        // Form success message styling 
+        p{
+          font-size: 18px;
+          margin: auto;
+        }
+      }
+  }
+}
+
