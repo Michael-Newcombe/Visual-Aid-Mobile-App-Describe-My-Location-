@@ -6,6 +6,10 @@
 
 Describe My Location is a mobile web app developed using the web framework Flask. The app is designed to aid people who are visually impaired when they walking along a street, by describing their physical surroundings using a computer vision and machine learning technique called image captioning. This is where a computer tries to describe an image in a natural language. The difference between this app and other visual aid apps that make use of image captioning is that Describe My Location does not require the user to take a picture of their surroundings using their device's camera instead, it uses a street view image based on the user's current geographical location as a reference for the user's surroundings. The street view image is then passed into a pre-trained image captioning model which generates a text description for the image. The text description is then passed into a text to speech system so that the text can be outputted to the user as speech.
 
+**Video demo:** https://vimeo.com/427505795
+
+**Original repo** https://gitlab.doc.gold.ac.uk/mnewc002/computer-vision-and-machine-learning
+
 ![](Image-captioning.png)
 
 ### App Specifications
